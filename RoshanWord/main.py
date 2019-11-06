@@ -276,3 +276,103 @@ class TextEdit(QTextEdit):
     def block_signals(self, objects, b):
         for o in objects:
             o.blockSignals(b)
+
+            def update_format(self):
+        """
+        Update the font format toolbar/actions when a new text selection is made. This is neccessary to keep
+        toolbars/etc. in sync with the current edit state.
+        :return:
+        """
+        # Disable signals for all format widgets, so changing values here does not trigger further formatting.
+        self.block_signals(self._format_actions, True)
+
+        self.fonts.setCurrentFont(self.editor.currentFont())
+        # Nasty, but we get the font-size as a float but want it was an int
+        self.fontsize.setCurrentText(str(int(self.editor.fontPointSize())))
+
+        self.italic_action.setChecked(self.editor.fontItalic())
+        self.underline_action.setChecked(self.editor.fontUnderline())
+        self.bold_action.setChecked(self.editor.fontWeight() == QFont.Bold)
+
+        self.alignl_action.setChecked(self.editor.alignment() == Qt.AlignLeft)
+        self.alignc_action.setChecked(self.editor.alignment() == Qt.AlignCenter)
+        self.alignr_action.setChecked(self.editor.alignment() == Qt.AlignRight)
+        self.alignj_action.setChecked(self.editor.alignment() == Qt.AlignJustify)
+
+        self.block_signals(self._format_actions, False)
+
+    def dialog_critical(self, s):
+        dlg = QMessageBox(self)
+        dlg.setText(s)
+        dlg.setIcon(QMessageBox.Critical)
+        dlg.show()
+
+    def file_open(self):
+        path, _ = QFileDialog.getOpenFileName(self, "Open file", "", "HTML documents (*.html);Text documents (*.txt);All files (*.*)")
+
+        try:
+            with open(path, 'rU') as f:
+                text = f.read()
+
+        except Exception as e:
+            self.dialog_critical(str(e))
+
+        else:
+            self.path = path
+            # Qt will automatically try and guess the format as txt/html
+            self.editor.setText(text)
+            self.update_title()
+
+    def file_save(self):
+        if self.path is None:
+            # If we do not have a path, we need to use Save As.
+            return self.file_saveas()
+
+        text = self.editor.toHtml() if splitext(self.path) in HTML_EXTENSIONS else self.editor.toPlainText()
+
+        try:
+            with open(self.path, 'w') as f:
+                f.write(text)
+
+        except Exception as e:
+            self.dialog_critical(str(e))
+
+    def file_saveas(self):
+        path, _ = QFileDialog.getSaveFileName(self, "Save file", "", "HTML documents (*.html);Text documents (*.txt);All files (*.*)")
+
+        if not path:
+            # If dialog is cancelled, will return ''
+            return
+
+        text = self.editor.toHtml() if splitext(path) in HTML_EXTENSIONS else self.editor.toPlainText()
+
+        try:
+            with open(path, 'w') as f:
+                f.write(text)
+
+        except Exception as e:
+            self.dialog_critical(str(e))
+
+        else:
+            self.path = path
+            self.update_title()
+
+    def file_print(self):
+        dlg = QPrintDialog()
+        if dlg.exec_():
+            self.editor.print_(dlg.printer())
+
+    def update_title(self):
+        self.setWindowTitle("%s - RoshanWord" % (os.path.basename(self.path) if self.path else "Untitled"))
+
+    def edit_toggle_wrap(self):
+        self.editor.setLineWrapMode( 1 if self.editor.lineWrapMode() == 0 else 0 )
+
+
+if __name__ == '__main__':
+
+    app = QApplication(sys.argv)
+    app.setApplicationName("RoshanWord")
+
+    window = MainWindow()
+    app.exec_()
