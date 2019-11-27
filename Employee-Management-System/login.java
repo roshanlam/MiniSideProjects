@@ -1,4 +1,4 @@
-package Employeee;
+package EMS;
 
 import java.awt.*;
 import javax.swing.*;
