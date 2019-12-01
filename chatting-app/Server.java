@@ -40,7 +40,7 @@ public class Server {
 
       // get nickname of newUser
       String nickname = (new Scanner ( client.getInputStream() )).nextLine();
-      nickname = nickname.replace(",", ""); //  ',' use for serialisation
+      nickname = nickname.replace(",", ""); //  ',' use for serialisation (the process of converting an object into a stream of bytes to store the object or transmit it to memory, a database, or a file. Its main purpose is to save the state of an object in order to be able to recreate it when needed. The reverse process is called deserialization)
       nickname = nickname.replace(" ", "_");
       System.out.println("New Client: \"" + nickname + "\"\n\t     Host:" + client.getInetAddress().getHostAddress());
 
@@ -130,7 +130,7 @@ class UserHandler implements Runnable {
       message = message.replace(":o", "<img src='http://1.bp.blogspot.com/-MB8OSM9zcmM/TvitChHcRRI/AAAAAAAAAiE/kdA6RbnbzFU/s400/surprised%2Bemoticon.png'>");
       message = message.replace(":O", "<img src='http://1.bp.blogspot.com/-MB8OSM9zcmM/TvitChHcRRI/AAAAAAAAAiE/kdA6RbnbzFU/s400/surprised%2Bemoticon.png'>");
 
-      // Gestion des messages private
+      // Private message management
       if (message.charAt(0) == '@'){
         if(message.contains(" ")){
           System.out.println("private msg : " + message);
@@ -143,7 +143,7 @@ class UserHandler implements Runnable {
               );
         }
 
-      // Gestion du changement
+      // Change management
       }else if (message.charAt(0) == '#'){
         user.changeColor(message);
         // update color for all other users
