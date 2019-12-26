@@ -1,5 +1,5 @@
 <h1>The 3d Shooter Game</h1>
-<h3>Version: 1.0.0 (pre-alpha)</h3>
+<h3>Version: 1.0.0</h3>
 <h3>Abstract</h3>
 Player appears in one of the two available respawn points called "red respawn point" and "green respawn point".
 Map represent a desert with abandoned houses and there are some stuff on the map like large boxes, small boxes and 
@@ -21,6 +21,6 @@ by pressing left button of the mouse.
 
 <h3>Technologies: Three.js + Webpack</h3>
 
-<p>Enjoy the game !</p>
+<p>I Hope You Enjoy the game !!! :)</p>
 
 <i>Created by Roshan Lamichhane</i>
