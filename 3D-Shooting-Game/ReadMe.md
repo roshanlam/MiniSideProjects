@@ -23,4 +23,4 @@ by pressing left button of the mouse.
 
 <p>Enjoy the game !</p>
 
-<i>Created by Nickolay Zamulov</i>
+<i>Created by Roshan Lamichhane</i>
