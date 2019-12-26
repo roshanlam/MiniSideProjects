@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>The Shooter Game - A 3d Game Developed by Roshan Lamichhane</title>
+
+	<link rel="stylesheet" type="text/css" href="./css/app.css">
+
+	<!-- VENDORS -->
+	<script type="text/javascript" src="../node_modules/three.js/node_modules/three/three.min.js"></script>
+	<script type="text/javascript" src="../node_modules/stats-js/build/stats.min.js"></script>
+
+	<!--BUILDS -->
+	<script type="text/javascript" src="./build/build.js"></script>
+
+</head>
+<body class="nonselect">
+	<div class="title">
+		<span class="text title-text">>> THE SHOOTER - A 3D GAME DEVELOPED BY ROSHAN LAMICHHANE</span>
+	</div>
+	<div class="start">
+		<div class="start-wrapper">
+			<div class="subtitle moving">
+				<span class="text">MOVING</span>
+				<div class="button button-a"><span>A</span></div>
+				<div class="button button-d"><span>D</span></div>
+				<div class="button button-w"><span>W</span></div>
+				<div class="button button-s"><span>S</span></div>
+			</div>
+			<div class="subtitle jumping">
+				<span class="text">JUMPING</span>
+				<div class="button button-space">SPACE</div>
+			</div>
+			<div class="subtitle attack">
+				<span class="text">ATTACK</span>
+				<div class="button mouse">
+					<div class="left-mouse-button"></div>
+					<div class="right-mouse-button"></div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="hint">
+					<span class="hint-text">Press into the circle to start a game ...</span>
+				</div>
+				<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+	<div class="console">
+		<span>Console:</span>
+	</div>
+	<div class="game-panel">
+		<canvas class="damage"></canvas>
+		<canvas class="aim"></canvas>
+		<div class="health menu-item">
+			<img src="./img/health.png">
+			<span>100</span>
+		</div>
+		<div class="shield menu-item">
+			<img src="./img/shield.png">
+			<span>100</span>
+		</div>
+		<div class="timer menu-item">
+			<img src="./img/timer.png">
+			<span>0:00</span>
+		</div>
+		<div class="weapon">
+			<img src="./img/weapon.png">
+		</div>
+	</div>
+</body>
+</html>
